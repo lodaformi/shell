@@ -26,8 +26,7 @@ do
         #重点，注意写法
         red_balls=(${red_balls[@]})  #将元素少一个的red_balls数组重新赋值给自身
         
-        
-        #这时另外一种更新数组自身的思路，但实现上不太好
+        #这是另外一种更新数组自身的思路，但实现上不太好
         #会出现这种结果，令人费解，17 red_balls[23] 15 04 red_balls[18]
         
         #for m in $(seq $rd_num $len)
@@ -45,5 +44,3 @@ res_blue[0]=$res
 echo 
 echo -e "\033[31m红球为:${res_red[@]} \033[0m"
 echo -e "\033[34m蓝球为:${res_blue[@]} \033[0m"
-
-
