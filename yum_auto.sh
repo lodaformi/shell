@@ -14,9 +14,10 @@ fi
 mount -o loop /root/CentOS-6.4-x86_64-bin-DVD1.iso $1 &> /dev/null
 
 #如果路径不存在，则创建
-[[ -e $1 ]]| mkdir -p $1
+[[ -e $1 ]] || mkdir -p $1
 
 #备份原始的yum配置文件
+#注意这里进入到某一个目录中执行
 (cd /etc/yum.repos.d ; rename .repo .repo.bak *.repo &> /dev/null)
 
 #使用HERE文档生成新的yum配置文件
