@@ -2,11 +2,15 @@
 
 read -p "input user name: " name
 id $name &> /dev/null
-if [ $? == 0 ]
-then
-	echo "user is already exist"
-	exit
-fi
+
+#if [ $? == 0 ]
+#then
+#	echo "user is already exist"
+#	exit
+#fi
+
+不用if判断，用双括号判断更简洁
+(($?==0)) && echo "user is already exist"; exit 
 
 useradd $name -m -s /bin/bash
 read -s -p "set user $name passwd: " pass
@@ -16,7 +20,10 @@ echo $pass | passwd --stdin $name &> /dev/null
 echo "$name:$pass" | chpasswd   &> /dev/null #ubuntu系统中使用chpasswd
 
 
-if [ $? == 0 ]
-then
-	echo "\nuser $name is ok"
-fi
+#if [ $? == 0 ]
+#then
+#	echo "\nuser $name is ok"
+#fi
+
+(($?==0)) && echo "\nuser $name is ok"
+
