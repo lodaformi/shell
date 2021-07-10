@@ -13,7 +13,7 @@ threshold=10
 #循环遍历位置参数
 for i in $@
 do
-        num=$(find $i -size +${threshold}M  | wc -l)
+        num=$(find $i -size +${threshold}M 2> /dev/null | wc -l)
         size=$( find $i -size +10M -exec ls -ld {} \; 2> /dev/null | tr -s " " | cut -d" " -f 5)
         sum=0
         #用循环将每个文件的size相加，存放到sum中
