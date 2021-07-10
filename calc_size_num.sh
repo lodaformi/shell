@@ -14,18 +14,24 @@ threshold=10
 for i in $@
 do
         num=$(find $i -size +${threshold}M 2> /dev/null | wc -l)
-        size=$( find $i -size +10M -exec ls -ld {} \; 2> /dev/null | tr -s " " | cut -d" " -f 5)
+        size=$( find $i -size +10M -exec ls -ld {} \; 2> /dev/null | tr -s " " | cut -d" " -f 5)                  
+        
         sum=0
-        #用循环将每个文件的size相加，存放到sum中
+        #循环计算每个文件的size
         for j in $size
         do
                 ((sum+=$j))
         done
-#       ((sum=sum/1024/1024))  #可以用这种方法计算，结果为整数
-        sum=$(echo "scale=3; $sum/1024/1024" | bc)  #计算出小数
-
-        #输出结果
-        echo "目录是：$i"
+        #((sum=sum/1024/1024))
+        sum=$(echo "scale=3;$sum/1024/1024" | bc)        
+        echo "目录是：$i"        
         echo "超过${threshold}M的文件数目：$num"
         echo -e "这些文件的总大小是：${sum}M\n"
+        
+        #这个很亮眼，一个 tr "\n" "+"将换行替换成+号，再放到(())中做运算，不用使用循环
+        all=$( find $i -size +10M -exec ls -ld {} \; 2> /dev/null | tr -s " " | cut -d" " -f 5| tr "\n" "+")
+        #这里需要注意，all替换成+号后，末尾有一个加号，这里${all}0就是加上一个0，外面加上小括号，先计算加法在计算除法
+        ((total=(${all}0)/1024/1024))
+        echo "total = ${total}"
+        
 done
