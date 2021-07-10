@@ -33,7 +33,9 @@ yum clean all &> /dev/null
 yum repolist &> /dev/null
 
 #如果yum repolist执行正确，则yum OK
-if (($? == 0))
-then
-        echo "yum is ok"
-fi
+#if (($? == 0))
+#then
+#        echo "yum is ok"
+#fi
+
+(($?==0)) &&  echo "yum is ok"
