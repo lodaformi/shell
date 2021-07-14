@@ -3,14 +3,11 @@
 read -p "input user name: " name
 id $name &> /dev/null
 
-#if [ $? == 0 ]
-#then
-#	echo "user is already exist"
-#	exit
-#fi
-
-不用if判断，用双括号判断更简洁
-(($?==0)) && echo "user is already exist"; exit 
+if (( $? == 0 ))
+then
+	echo "user is already exist"
+	exit
+fi
 
 useradd $name -m -s /bin/bash
 read -s -p "set user $name passwd: " pass
