@@ -14,9 +14,11 @@ do
 	then
 		echo "$USER是系统用户-$ID"
 		((system+=1))
+		echo "system is $system"	#通过调试信息可以看出变量在自增，但while循环外的变量没有变化，即使用export变成全局变量也不行
 	else
 		echo "$USER是普通用户-$ID"
 		((normal+=1))
+		echo "normal is $normal" 		
 	fi
 done
 
