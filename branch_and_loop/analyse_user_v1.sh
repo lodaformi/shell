@@ -7,7 +7,7 @@
 system=0
 normal=0
 
-#通过调试信息可以看出循环内的变量在自增，但while循环 外 的变量没有变化，即使用export变成全局变量也不行
+#通过调试信息可以看出循环内的变量在自增，但while循环 外 的变量没有变化，即使用export变成全局变量也不行，不知道为什么
 cat passwd | cut -d: -f1,3| tr ":" " " | while read USER  ID
 do
 	if (($ID<500 )) || (($ID>60000))
