@@ -1,0 +1,5 @@
+()
+$()
+管道
+这三者都会开启一个子shell运行，子shell中的环境不会影响父shell及以上shell，
+但是父shell及以上的shell环境会影响子shell
